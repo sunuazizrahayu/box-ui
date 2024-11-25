@@ -6,7 +6,7 @@ $credentials = include 'credentials.php';
 $stored_username = $credentials['username'];
 $stored_hashed_password = $credentials['hashed_password'];
 
-$config_file = '/data/adb/php7/files/www/auth/config.json';
+$config_file = $_SERVER['DOCUMENT_ROOT'].'/auth/config.json';
 
 if (!file_exists($config_file)) {
     die('Error: Configuration file not found.');
@@ -49,95 +49,74 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error = 'Invalid username or password.';
     }
 }
+
+$base_url = '/theme/'
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
-    <!-- Import Materialize CSS -->
-        <!-- CSS Files -->
-    <link rel="stylesheet" href="css/materialize.min.css" />
-    <!-- Custom Styles for Dark Mode -->
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-box {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 300px;
-            text-align: center;
-        }
-        .input-field input[type=text], .input-field input[type=password] {
-            color: #ffffff;
-        }
-        .input-field label {
-            color: #ffffff;
-        }
-        .input-field input[type=text]:focus + label,
-        .input-field input[type=password]:focus + label {
-            color: #26a69a !important;
-        }
-        .input-field input[type=text]:focus,
-        .input-field input[type=password]:focus {
-            border-bottom: 1px solid #26a69a !important;
-            box-shadow: 0 1px 0 0 #26a69a !important;
-        }
-        .error {
-            color: red;
-            margin-bottom: 20px;
-        }
-        .powered-by {
-            color: #9e9e9e;
-            margin-top: 20px;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Box UI - Login</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?=$base_url ?>plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?=$base_url ?>dist/css/adminlte.min.css?v=3.2.0">
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/webui/assets/img/icon.png">
 </head>
-<body>
-    <div class="login-box">
-        <h5>Welcome to BFR WebUI</h5>
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <form method="post" action="login.php">
-            <div class="input-field">
-                <input type="text" name="username" id="username" required>
-                <label for="username">Username</label>
-            </div>
-            <div class="input-field">
-                <input type="password" name="password" id="password" required>
-                <label for="password">Password</label>
-                <p>
-                    <label>
-                        <input type="checkbox" onclick="togglePassword()">
-                        <span>Show Password</span>
-                    </label>
-                </p>
-            </div>
-            <button type="submit" class="btn waves-effect waves-light teal lighten-2">Login</button>
-        </form>
-        <div class="powered-by">powered by ZAPBER</div>
+<body class="hold-transition login-page dark-mode">
+<div class="login-box">
+    <div class="login-logo">
+        <img src="/webui/assets/img/logo.png" class="img-fluid">
     </div>
-    <!-- Import Materialize JS -->
-    <script src="js/materialize.min.js"></script>
-    <!-- Custom JavaScript for Show Password -->
-    <script>
-        function togglePassword() {
-            var passwordField = document.getElementById("password");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
-    </script>
+    <?php if (isset($error)): ?>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" style="color: #fff; opacity: 1" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?=$error ?>
+    </div>
+    <?php endif ?>
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Welcome to Box UI</p>
+
+            <form method="post" action="login.php">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Username" name="username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+                </div>
+
+                <p class="mt-3 text-center">
+                    Mod by <a href="https://github.com/sunuazizrahayu" target="_blank">@sunuazizrahayu</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="<?=$base_url ?>plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?=$base_url ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?=$base_url ?>dist/js/adminlte.min.js?v=3.2.0"></script>
 </body>
 </html>
