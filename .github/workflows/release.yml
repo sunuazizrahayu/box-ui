@@ -1,0 +1,173 @@
+name: Create or Update Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger hanya untuk tag yang diawali dengan 'v'
+
+jobs:
+  release:
+    name: Create or Update Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Pastikan semua data git history diambil
+
+      ## Step 2: Install GitHub CLI (gh)
+      #- name: Install GitHub CLI
+      #  run: sudo apt-get install -y gh
+
+      # Step 3: Set environment variable
+      - name: Configure environment variable
+        run: |
+          echo "MODULE_PROP=module.prop" >> $GITHUB_ENV
+          echo "ZIP_NAME=Box-UI-${{ github.ref_name }}.zip" >> $GITHUB_ENV
+          echo "Environment variables set globally."
+
+      # Step 4: Periksa apakah release dengan tag sudah ada
+      - name: Check if release exists
+        id: check_release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_EXISTS=$(gh release view ${{ github.ref_name }} --json id --jq '.id' || echo "")
+          echo "RELEASE_EXISTS=$RELEASE_EXISTS" >> $GITHUB_ENV
+
+      # Step 5: Buat release jika belum ada
+      - name: Create release if not exists
+        if: env.RELEASE_EXISTS == ''
+        run: |
+          # Login dengan token GitHub CLI
+          gh auth login --with-token <<< "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+
+          # Membuat release tanpa file build
+          gh release create ${{ github.ref_name }} \
+            --title "Release ${{ github.ref_name }}" \
+            --notes "Auto-generated release for tag ${{ github.ref_name }}"
+
+      # Step 6: Update module.prop
+      - name: Update module.prop
+        run: |
+          UPDATE_URL="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/update.json"
+
+          # Set version
+          echo "Set version"
+          if grep -q "^version=" "$MODULE_PROP"; then
+            # override
+            sed -i "s|^version=.*|version=${{ github.ref_name }}|" "$MODULE_PROP"
+          else
+            # append
+            echo "version=${{ github.ref_name }}" >> "$MODULE_PROP"
+          fi
+
+          # Set version code
+          echo "Set version code"
+          #VERSION_CODE=$(date +"%Y%m%d")
+          VERSION_CODE=0
+          if grep -q "^versionCode=" "$MODULE_PROP"; then
+            # get new next version
+            VERSION_CODE=$(grep "^versionCode=" "$MODULE_PROP" | cut -d '=' -f 2)
+            VERSION_CODE=$((VERSION_CODE + 1))
+
+            # override
+            sed -i "s|^versionCode=.*|versionCode=$VERSION_CODE|" "$MODULE_PROP"
+          else
+            # append
+            echo "versionCode=$VERSION_CODE" >> "$MODULE_PROP"
+          fi
+
+          # Periksa apakah `updateJson` ada
+          echo "Set updateJson"
+          if grep -q "^updateJson=" "$MODULE_PROP"; then
+            # Override nilai updateJson
+            sed -i "s|^updateJson=.*|updateJson=$UPDATE_URL|" "$MODULE_PROP"
+            echo "updateJson di-override dengan nilai baru di $MODULE_PROP."
+          else
+            # Tambahkan `updateJson` jika belum ada
+            echo "updateJson=$UPDATE_URL" >> "$MODULE_PROP"
+            echo "updateJson ditambahkan ke $MODULE_PROP."
+          fi
+
+          echo "result:"
+          cat $MODULE_PROP
+
+      # Step 7: Create update.json file
+      - name: Update update.json
+        run: |
+          # ambil data dari module.prop
+          VERSION=$(grep 'version=' module.prop | cut -d '=' -f 2)
+          VERSION_CODE=$(grep 'versionCode=' module.prop | cut -d '=' -f 2)
+          DLURL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/${{ github.ref_name }}/${{ env.ZIP_NAME }}"
+          CHANGEURL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/main/CHANGELOG.md"
+
+          if [ -z "$VERSION" ]; then
+            VERSION="${{ github.ref_name }}"
+          fi
+
+          # update data
+          UPDATE_JSON_FILE="update.json"
+          sed -i "s|\"version\": \".*\"|\"version\": \"$VERSION\"|" $UPDATE_JSON_FILE
+          sed -i "s|\"versionCode\": \".*\"|\"versionCode\": \"$VERSION_CODE\"|" $UPDATE_JSON_FILE
+          sed -i "s|\"zipUrl\": \".*\"|\"zipUrl\": \"$DLURL\"|" $UPDATE_JSON_FILE
+          sed -i "s|\"changelog\": \".*\"|\"changelog\": \"$CHANGEURL\"|" $UPDATE_JSON_FILE
+          
+          echo "Result:"
+          cat $UPDATE_JSON_FILE
+
+      # Step 8: Update Changelog
+      - name: Update CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Ambil changelog menggunakan GitHub CLI
+          TAG="${{ github.ref_name }}"
+          CHANGELOG=$(gh release view "$TAG" --json body -q .body)
+          echo "$CHANGELOG" > CHANGELOG.md
+
+      # Step 9: Buat file ZIP dengan mengecualikan `.github`
+      - name: Create zip file
+        run: |
+          mkdir -p build
+
+          # build with github head
+          # git archive --format=zip --output="build/$ZIP_NAME" HEAD ':!/.github'
+
+          # build manual
+          zip -r "build/$ZIP_NAME" . \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x ".gitattributes" \
+            -x "build/*"
+
+          echo "Build results"
+          ls -la build
+
+      # Step 10: Tambahkan asset ke release yang ada
+      - name: Upload asset to existing release
+        if: env.RELEASE_EXISTS != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.ref_name }} build/${{ env.ZIP_NAME }} --clobber
+
+      # Step 11: Commit UPDATE
+      - name: Commit and Push update
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Menyiapkan Git user
+          git config --global user.email "action@github.com"
+          git config --global user.name "github-actions[bot]"
+
+          # Pastikan berada di branch main
+          git checkout main
+
+          # Commit hanya file update.json
+          git commit -am "${{ github.ref_name }}" || echo "Tidak ada perubahan untuk di-commit."
+
+          # Push perubahan ke remote branch release
+          git push origin main
