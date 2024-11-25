@@ -1,6 +1,6 @@
 {
-  "version": "",
-  "versionCode": "",
-  "zipUrl": "",
-  "changelog": ""
+  "version": "v.1.0.0",
+  "versionCode": "1",
+  "zipUrl": "https://github.com/sunuazizrahayu/box-ui/releases/download/v.1.0.0/Box-UI-v.1.0.0.zip",
+  "changelog": "https://github.com/sunuazizrahayu/box-ui/raw/main/CHANGELOG.md"
 }

@@ -1,1 +1,3 @@
-
+- initial release from forked version 1.0.6
+- add updater on module
+- enable login page as default
