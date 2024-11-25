@@ -36,7 +36,7 @@ $host = $x[0];
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title> BOX UI</title>
+    <title>BOX UI</title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -265,12 +265,15 @@ $host = $x[0];
                   <p>Documentation</p>
                   <span class="badge badge-secondary"></span>
                 </a>
+              </li>
               <li class="nav-item">
-                <a href="https://github.com/geeks121/webui_bfm">
-                  <i class="fas fa-code-branch"></i>
+                <a href="https://github.com/sunuazizrahayu/box-ui" target="_blank">
+                  <i class="fab fa-github"></i>
                   <p>Our github</p>
                   <span class="badge badge-secondary"></span>
                 </a>
+              </li>
+              <li class="nav-item">
                 <a href="#" onclick="loadIframe('tools/reboot.php')">
                   <i class="fas fa-sync"></i>
                   <p>Reboot</p>
