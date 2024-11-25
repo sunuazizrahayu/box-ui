@@ -11,7 +11,7 @@
 BOX UI is a web-based interface for managing Box for Android tools. It supports both Magisk and KernelSU modules and provides a comprehensive suite of features to control and monitor your Android device access your device without touch it.
 
 ## Login
-- **Users**: admin
+- **Username**: admin
 - **Password**: 12345
 
 ## Features
