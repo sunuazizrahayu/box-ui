@@ -1,2 +1,1 @@
-- refactor login page with new ui
-- update login info on readme
+- fix installation for update module
