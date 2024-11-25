@@ -35,17 +35,14 @@ $host = $x[0];
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>BOX UI</title>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="webui/assets/img/icon.png"
-      type="kaiadmin/image/x-icon"
-    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+    <link rel="icon" href="webui/assets/img/icon.png" type="image/x-icon">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="kaiadmin/assets/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="kaiadmin/assets/css/kaiadmin.min.css" >
 
     <!-- Fonts and icons -->
     <script src="kaiadmin/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -73,10 +70,7 @@ $host = $x[0];
           height: calc(100vh - 65px);
           border: none;
       }
-  </style>
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="kaiadmin/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="kaiadmin/assets/css/kaiadmin.min.css" />
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -308,9 +302,7 @@ $host = $x[0];
             <!-- End Logo Header -->
           </div>
           <!-- Navbar Header -->
-          <nav
-            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="dark"
-          >
+          <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="dark">
             <div class="container-fluid">
               <nav
                 class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
@@ -318,9 +310,7 @@ $host = $x[0];
               </nav>
 
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                <li
-                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"></li>
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a
                     class="dropdown-toggle profile-pic"
@@ -340,41 +330,20 @@ $host = $x[0];
                       <span class="fw-bold">Root</span>
                     </span>
                   </a>
-                  <ul class="dropdown-menu dropdown-user animated fadeIn">
-                    <div class="dropdown-user-scroll scrollbar-outer">
-                      <!--<li>
-                        <div class="user-box">
-                          <div class="avatar-lg">
-                            <img
-                              src="kaiadmin/assets/img/profile.jpg"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
-                          </div>
-                          <div class="u-text">
-                            <h4>Hi root</h4>
-                            <p class="text-muted">hello@root.com</p>
-                            <a
-                              href="£"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >View Profile</a
-                            >
-                          </div>
-                        </div>
-                      </li>-->
+                  <div class="dropdown-user-scroll scrollbar-outer">
+                    <ul class="dropdown-menu dropdown-user animated fadeIn">
                       <li>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" onclick="loadIframe('/auth/change_password.php')">Reset password</a>
                         <a class="dropdown-item" href="auth/logout.php">Logout</a>
                       </li>
-                    </div>
-                  </ul>
+                    </ul>
+                  </div>
                 </li>
               </ul>
             </div>
           </nav>
           <!-- End Navbar -->
-                   <!-- Main Content -->
+        <!-- Main Content -->
         <div class="content">
           <!-- Iframe -->
           <!--<iframe class="dashboard-iframe" id="iframe" src="http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies"></iframe>-->
