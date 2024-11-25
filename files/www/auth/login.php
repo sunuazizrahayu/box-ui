@@ -106,7 +106,7 @@ $base_url = '/theme/'
                 </div>
 
                 <p class="mt-3 text-center">
-                    Mod by <a href="https://github.com/sunuazizrahayu" target="_blank">@sunuazizrahayu</a>
+                    Made by <a href="https://github.com/sunuazizrahayu" target="_blank">@sunuazizrahayu</a>
                 </p>
             </form>
         </div>

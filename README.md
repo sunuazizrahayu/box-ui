@@ -12,7 +12,7 @@ BOX UI is a web-based interface for managing Box for Android tools. It supports 
 
 ## Login
 - **Username**: admin
-- **Password**: 12345
+- **Password** : 12345
 
 ## Features
 - **Clash Dashboard**: Comprehensive interface for managing Clash configurations.
