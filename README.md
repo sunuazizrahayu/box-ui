@@ -1,23 +1,20 @@
 ![logo](https://github.com/user-attachments/assets/252391a0-9f95-4a8f-8e29-cb0ff071559f)
 
-
-
 <div align="center">
-  <img alt="License" src="https://img.shields.io/github/license/geeks121/webui_bfm?style=for-the-badge">
-  <img alt="Forks" src="https://img.shields.io/github/forks/geeks121/webui_bfm?style=for-the-badge">
-  <img alt="Release" src="https://img.shields.io/github/v/release/geeks121/webui_bfm?style=for-the-badge">
-  <img alt="Downloads" src="https://img.shields.io/github/downloads/geeks121/webui_bfm/total?style=for-the-badge">
+  <img alt="License" src="https://img.shields.io/github/license/sunuazizrahayu/box-ui?style=for-the-badge">
+  <img alt="Forks" src="https://img.shields.io/github/forks/sunuazizrahayu/box-ui?style=for-the-badge">
+  <img alt="Release" src="https://img.shields.io/github/v/release/sunuazizrahayu/box-ui?style=for-the-badge">
+  <img alt="Downloads" src="https://img.shields.io/github/downloads/sunuazizrahayu/box-ui/total?style=for-the-badge">
 </div>
 
 ## Overview
 BOX UI is a web-based interface for managing Box for Android tools. It supports both Magisk and KernelSU modules and provides a comprehensive suite of features to control and monitor your Android device access your device without touch it.
-## login
 
+## Login
 - **Users**: admin
 - **Password**: 12345
 
 ## Features
-
 - **Clash Dashboard**: Comprehensive interface for managing Clash configurations.
 - **System Info**: View detailed information about your device.
 - **Tiny FM**: File manager for modifying files and configuration files.
@@ -31,58 +28,40 @@ BOX UI is a web-based interface for managing Box for Android tools. It supports 
 - **Reboot Device**: Reboot your device or reboot to TWRP.
 - **Authentication**: Login, logout, and reset password functionalities.
 
-## Current Version
-
-<div align="center">
-  <img alt="Release" src="https://img.shields.io/github/v/release/geeks121/webui_bfm?style=for-the-badge">
-</div>
-
-
 ## Installation
-
-- install as Magisk or kernelSU module
+- Install as Magisk or kernelSU module
 
 ### Requirements
-
-- Termux
 - Magisk or KernelSU
+- Termux
 
 
 
 ## Usage
 
 ### Accessing BOX UI
-
 Once BOX UI is set up and running, access it via the following addresses:
 - [http://127.0.0.1:80](http://127.0.0.1:80)
 - [http://127.0.0.1](http://127.0.0.1)
 
 ### Our main feature
 ### Managing BOX Settings
-
 Access BOX settings through the web interface to configure BFR settings, select kernels, and manage Clash or SingBox settings.
 
 ### SMS Inbox
-
 Read and manage your Android SMS directly from the web UI.
 
 ### Config Generator
-
 Generate Clash configurations and import Vmess, Vless, Trojan, and Shadowsocks through the UI.
 
-## Credits
 
+## Credits
+- **Original Author**: [geeks121/webui_bfm](https://github.com/geeks121/webui_bfm)
 - **PHP7 Webserver**: [nosignals/magisk-php7-webserver](https://github.com/nosignals/magisk-php7-webserver)
 - **BOX for Magisk**: [taamarin/box_for_magisk](https://github.com/taamarin/box_for_magisk)
 - **Config Generator**: [mitralola716/ocgen](https://github.com/mitralola716/ocgen)
 
-### Installation
-- **Download**: download this repo as zip file.
-- **check**: check if your download file is still folder, if yes extract first.
-- **select**: select all files in webui_bfm file folder.
-- **re-zip**: zip again and flash the module.
-- **check again**: make sure when you download the module is not only folder name.
-
+## About
 ### ScreenShot
 ![image](https://github.com/user-attachments/assets/342b79e5-3169-40cc-b5c6-18a791396a5a)
 ![image](https://github.com/user-attachments/assets/0f7abb32-8834-461d-9704-2c407b1425a4)
@@ -97,9 +76,4 @@ Generate Clash configurations and import Vmess, Vless, Trojan, and Shadowsocks t
 
 
 ## License
-
-BOX UI is licensed under the latest MIT LICENSE.
-
-## Contributors
-
-A big thanks to all the contributors who have helped make BOX UI what it is today!
+BOX UI is licensed under the latest [MIT LICENSE](https://github.com/sunuazizrahayu/box-ui/blob/main/LICENSE).
