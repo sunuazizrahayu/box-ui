@@ -111,20 +111,20 @@ $host = $x[0];
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies')">
+                <a href="#clash" onclick="loadIframe('http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies')">
                   <i class="fas fa-home"></i>
                   <p>Clash Dashboard</p>
                   <span class="badge badge-secondary">1</span>
                 </a>
               </li>
-            <li class="nav-item">
-              <a href="#" onclick="loadIframe('/tools/sysinfo.php')">
+              <li class="nav-item">
+                <a href="#sysinfo" onclick="loadIframe('/tools/sysinfo.php')">
                   <i class="fas fa-cogs"></i>
                   <p>System Info</p>
                   <span class="badge badge-secondary"></span>
-              </a>
-            </li>
-                      
+                </a>
+              </li>
+
 
               <li class="nav-section">
                 <span class="sidebar-mini-icon">
@@ -133,21 +133,21 @@ $host = $x[0];
                 <h4 class="text-section">Tools</h4>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('/tools/smsviewer.php')">
-                    <i class="fas fa-comment-alt"></i>
-                    <p>SMS Inbox</p>
-                    <span class="badge badge-secondary"></span>
+                <a href="#sms" onclick="loadIframe('/tools/smsviewer.php')">
+                  <i class="fas fa-comment-alt"></i>
+                  <p>SMS Inbox</p>
+                  <span class="badge badge-secondary"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('/tiny/index.php')">
+                <a href="#fm" onclick="loadIframe('/tiny/index.php')">
                   <i class="fas fa-archive"></i>
                   <p>TinyFM</p>
                   <span class="badge badge-secondary"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('/tools/boxsettings.php')">
+                <a href="#box-set" onclick="loadIframe('/tools/boxsettings.php')">
                   <i class="fas fa-cube"></i>
                   <p>BOX SET</p>
                   <span class="badge badge-secondary"></span>
@@ -162,23 +162,22 @@ $host = $x[0];
                 <div class="collapse" id="bfr">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#" onclick="loadIframe('http://<?php echo $host; ?>/tiny/index.php?p=box%2Fclash&edit=config.yaml&env=ace')">
+                      <a href="#box-config-editor" onclick="loadIframe('http://<?php echo $host; ?>/tiny/index.php?p=box%2Fclash&edit=config.yaml&env=ace')">
                         <span class="sub-item">config.yaml editor</span>
                       </a>
                     </li>
-
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/executed.php')">
+                      <a href="#box-command" onclick="loadIframe('/tools/executed.php')">
                         <span class="sub-item">Command</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/ocgen/index.php')">
+                      <a href="#box-config-generator" onclick="loadIframe('/tools/ocgen/index.php')">
                         <span class="sub-item">Config Generator</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/logs.php')">
+                      <a href="#box-logs" onclick="loadIframe('/tools/logs.php')">
                         <span class="sub-item">BOX logs</span>
                       </a>
                     </li>
@@ -199,17 +198,17 @@ $host = $x[0];
                 <div class="collapse" id="networks">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/ipset.php')">
+                      <a href="#networks-ip" onclick="loadIframe('/tools/ipset.php')">
                         <span class="sub-item">Set Wlan Ip</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/modpes.php')">
+                      <a href="#networks-airplane" onclick="loadIframe('/tools/modpes.php')">
                         <span class="sub-item">Airplane Pilot</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" onclick="loadIframe('/tools/vnstat.php')">
+                      <a href="#networks-vnstat" onclick="loadIframe('/tools/vnstat.php')">
                         <span class="sub-item">Vnstat Bandwith</span>
                       </a>
                     </li>
@@ -225,7 +224,7 @@ $host = $x[0];
                 <div class="collapse" id="root_tools">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#" onclick="loadIframe('http://<?php echo $host; ?>:3001')">
+                      <a href="#ttyd" onclick="loadIframe('http://<?php echo $host; ?>:3001')">
                         <span class="sub-item">Ttyd terminal</span>
                       </a>
                     </li>
@@ -241,26 +240,21 @@ $host = $x[0];
                 <div class="collapse" id="admin">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#" onclick="loadIframe('/auth/change_password.php')">
+                      <a href="#admin-password" onclick="loadIframe('/auth/change_password.php')">
                         <span class="sub-item">Reset Password</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#" onclick="loadIframe('/auth/manage_login.php')">
+                      <a href="#admin-login" onclick="loadIframe('/auth/manage_login.php')">
                         <span class="sub-item">enable/disable login</span>
                       </a>
                     </li>
-                    <!--<li>
-                      <a href="#">
-                        <span class="sub-item">Icon Menu</span>
-                      </a>
-                    </li>-->
                   </ul>
                 </div>
               </li>
 
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('/article.html')">
+                <a href="#documentation" onclick="loadIframe('/article.html')">
                   <i class="fas fa-file-word"></i>
                   <p>Documentation</p>
                   <span class="badge badge-secondary"></span>
@@ -274,7 +268,7 @@ $host = $x[0];
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="loadIframe('tools/reboot.php')">
+                <a href="#reboot" onclick="loadIframe('tools/reboot.php')">
                   <i class="fas fa-sync"></i>
                   <p>Reboot</p>
                   <span class="badge badge-secondary"></span>
