@@ -1,7 +1,7 @@
 id=box-ui
 name=Box UI
-version=v.1.0.2
-versionCode=3
+version=v.1.0.3
+versionCode=4
 author=sunuazizrahayu
 description=Universal WebUI for BFM/BFR, use gateway or 127.0.0.1:80 or 127.0.0.1 direct.
 updateJson=https://raw.githubusercontent.com/sunuazizrahayu/box-ui/main/update.json
