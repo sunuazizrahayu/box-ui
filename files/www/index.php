@@ -343,21 +343,16 @@ $host = $x[0];
             </div>
           </nav>
           <!-- End Navbar -->
-        <!-- Main Content -->
-        <div class="content">
-          <!-- Iframe -->
-          <!--<iframe class="dashboard-iframe" id="iframe" src="http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies"></iframe>-->
-          <iframe class="dashboard-iframe" id="iframe" src="/tools/sysinfo.php"></iframe>
-                  
-        </div>
 
-        <!-- End Main Content --> 
+          <!-- Main Content -->
+          <div class="content">
+            <!-- Iframe -->
+            <!--<iframe class="dashboard-iframe" id="iframe" src="http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies"></iframe>-->
+            <iframe class="dashboard-iframe d-none" id="iframe" src="/tools/sysinfo.php"></iframe>
+          </div>
+          <!-- End Main Content --> 
         </div>
-       
-        
-        <!--<footer class="footer">
-
-        </footer>-->
+        <!-- /.main-header -->
       </div>
 
       <!-- Custom template | don't include it in your project! -->
@@ -382,33 +377,16 @@ $host = $x[0];
     <script src="kaiadmin/assets/js/kaiadmin.min.js"></script>
 
     <script>
-      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#177dff",
-        fillColor: "rgba(23, 125, 255, 0.14)",
-      });
+    $(document).ready(function() {
+      var hash = document.URL.substr(document.URL.indexOf('#')+1);
+      let url = '/tools/sysinfo.php';
 
-      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#f3545d",
-        fillColor: "rgba(243, 84, 93, .14)",
-      });
-
-      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#ffa534",
-        fillColor: "rgba(255, 165, 52, .14)",
-      });
-
+      $('#iframe').removeClass('d-none');
+      if (hash != '') {
+        console.log('open menu '+hash)
+        $('.sidebar-content a[href*="#'+hash+'"]').click();
+      }
+    })
     </script>
   </body>
 </html>
