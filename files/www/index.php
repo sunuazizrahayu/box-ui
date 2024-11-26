@@ -108,14 +108,12 @@ $host = $x[0];
                 <a href="#clash" onclick="loadIframe('http://<?php echo $host; ?>:9090/ui/?hostname=<?php echo $host; ?>#/proxies')">
                   <i class="fas fa-home"></i>
                   <p>Clash Dashboard</p>
-                  <span class="badge badge-secondary">1</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#sysinfo" onclick="loadIframe('/tools/sysinfo.php')">
                   <i class="fas fa-cogs"></i>
                   <p>System Info</p>
-                  <span class="badge badge-secondary"></span>
                 </a>
               </li>
 
@@ -381,10 +379,15 @@ $host = $x[0];
       var hash = document.URL.substr(document.URL.indexOf('#')+1);
       let url = '/tools/sysinfo.php';
 
+      //remove last submenu
+      $('.sidebar-content a').click(function() {
+        $('.sidebar-content li.nav-item').removeClass('submenu');
+      })
+
       $('#iframe').removeClass('d-none');
       if (hash != '') {
         console.log('open menu '+hash)
-        $('.sidebar-content a[href*="#'+hash+'"]').click();
+        $('.sidebar-content a[href*="#'+hash+'"]').click().parent().addClass('submenu');
       }
     })
     </script>
