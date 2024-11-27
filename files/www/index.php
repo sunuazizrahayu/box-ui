@@ -26,7 +26,7 @@ function redirect($path='')
 // For get URL PATH
 $request = $_SERVER['REQUEST_URI'];
 $route['/'] = 'page/index.php';
-$route['/dashboard'] = 'page/sysinfo.php';
+$route['/dashboard'] = 'page/dashboard.php';
 
 
 // middleware
