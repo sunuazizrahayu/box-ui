@@ -209,5 +209,46 @@ $load_3_percent = round(($load_3 / $cpu_nb) * 100);
 			<td>Load Average (15 min)</td>
 			<td><?=$load_3_percent ?>% (<?=$load_3 ?>)</td>
 		</tr>
+
+<?php
+$swap_total_kb = shell_exec('cat /proc/meminfo | grep SwapTotal | awk \'{print $2}\'');
+$swap_total_gb = intval(trim($swap_total_kb)) / 1024 / 1024; // Convert to GB
+$swap_total_gb_rounded = number_format($swap_total_gb, 2);
+$swap_total = 'Not Available';
+if ($swap_total_kb > 0) {
+	$swap_total = $swap_total_gb_rounded .' GB';
+}
+
+$swap_free_kb = shell_exec('cat /proc/meminfo | grep SwapFree | awk \'{print $2}\'');
+$swap_free_gb = intval(trim($swap_free_kb)) / 1024 / 1024; // Convert to GB
+$swap_free_gb_rounded = number_format($swap_free_gb, 2);
+
+$swap_used = 0;
+$swap_used_percent = 0;
+if ($swap_total_kb > 0) {
+	$swap_used_gb = $swap_total_gb_rounded - $swap_free_gb_rounded;
+	$swap_used = $swap_used_gb . ' GB';
+	$swap_used_percent = number_format((($swap_used_gb / $swap_total_gb_rounded) * 100), 2);
+}
+?>
+		<tr colspan="2" style="font-weight: bold;">
+			<td>Disk Info</td>
+		</tr>
+		<tr>
+			<td>Total Swap</td>
+			<td><?=$swap_total ?></td>
+		</tr>
+		<tr>
+			<td>Used Swap</td>
+			<td><?=$swap_used ?></td>
+		</tr>
+
+
+<?php
+?>
+		<tr>
+			<td>RAM Usage</td>
+			<td><?=$swap_used ?></td>
+		</tr>
 	</tbody>
 </table>
