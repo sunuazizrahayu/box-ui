@@ -155,5 +155,59 @@ $battery_temperature = shell_exec('dumpsys battery | grep temperature | cut -d \
 			<td>Temperature</td>
 			<td><?=$battery_temperature ?> °C</td>
 		</tr>
+
+<?php
+$cpu_info = shell_exec('cat /proc/cpuinfo | grep -i "^model name" | awk -F": " \'{print $2}\' | head -1 | sed \'s/ \+/ /g\'');
+
+$cpu_freq = shell_exec('cat /proc/cpuinfo | grep -i "^cpu MHz" | awk -F": " \'{print $2}\' | head -1');
+$cpu_freq = intval(trim($cpu_freq));
+if (empty($cpu_freq)) {
+    $cpu_freq = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq');
+    $cpu_freq = intval(trim($cpu_freq)) / 1000;
+}
+$cpu_bogomips = shell_exec('cat /proc/cpuinfo | grep -i "^bogomips" | awk -F": " \'{print $2}\' | head -1');
+
+# cpu load average
+$cpu_nb = shell_exec('cat /proc/cpuinfo | grep "^processor" | wc -l');
+$cpu_nb = intval(trim($cpu_nb));
+
+$loadavg = shell_exec('cat /proc/loadavg');
+$loadavg_arr = explode(' ', $loadavg);
+
+$load_1 = floatval($loadavg_arr[0]);
+$load_2 = floatval($loadavg_arr[1]);
+$load_3 = floatval($loadavg_arr[2]);
+
+$load_1_percent = round(($load_1 / $cpu_nb) * 100);
+$load_2_percent = round(($load_2 / $cpu_nb) * 100);
+$load_3_percent = round(($load_3 / $cpu_nb) * 100);
+?>
+		<tr colspan="2" style="font-weight: bold;">
+			<td>CPU</td>
+		</tr>
+		<tr>
+			<td>CPU Model</td>
+			<td><?=$cpu_info ?></td>
+		</tr>
+		<tr>
+			<td>CPU Frequency</td>
+			<td><?=$cpu_freq ?> MHz</td>
+		</tr>
+		<tr>
+			<td>CPU Bogomips</td>
+			<td><?=$cpu_bogomips ?></td>
+		</tr>
+		<tr>
+			<td>Load Average (1 min)</td>
+			<td><?=$load_1_percent ?>% (<?=$load_1 ?>)</td>
+		</tr>
+		<tr>
+			<td>Load Average (5 min)</td>
+			<td><?=$load_2_percent ?>% (<?=$load_2 ?>)</td>
+		</tr>
+		<tr>
+			<td>Load Average (15 min)</td>
+			<td><?=$load_3_percent ?>% (<?=$load_3 ?>)</td>
+		</tr>
 	</tbody>
 </table>
