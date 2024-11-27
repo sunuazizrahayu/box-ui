@@ -32,6 +32,22 @@ function getCpuUsage() {
     return $cpuUsage;
 }
 
+function batStatusCheck() {
+	$battery_state = shell_exec('dumpsys battery | grep status | cut -d \':\' -f2');
+    switch ($battery_state) {
+        case 1:
+            return "Unknown";
+        case 2:
+            return "Charging";
+        case 3:
+            return "Discharging";
+        case 4:
+            return "Not charging";
+        case 5:
+            return "Full";
+    }
+}
+
 # device model
 $device_model = shell_exec('getprop ro.product.model');
 $device_model = trim($device_model);
@@ -63,14 +79,23 @@ $cpu_used = round(getCpuUsage(), 2);
 
 # kernel
 $kernel_info = php_uname('r');
+
+# battery ac
+$ac_powered = shell_exec('dumpsys battery | grep AC | cut -d \':\' -f2');
+$battery_status = batStatusCheck();
+$battery_level = shell_exec('dumpsys battery | grep level | cut -d \':\' -f2');
+$battery_current = shell_exec('cat /sys/class/power_supply/battery/current_now');
+if (strlen(trim($battery_current)) >= 5) {
+    $battery_current = round(shell_exec('cat /sys/class/power_supply/battery/current_now') / 1000);
+}
+$battery_voltage = round(shell_exec('cat /sys/class/power_supply/battery/voltage_now') / 1000000, 2);
+$battery_temperature = shell_exec('dumpsys battery | grep temperature | cut -d \':\' -f2') / 10;
 ?>
 <table border="1px">
-	<thead>
-		<tr colspan="2">
-			<th>System</th>
-		</tr>
-	</thead>
 	<tbody>
+		<tr colspan="2" style="font-weight: bold;">
+			<td>System</td>
+		</tr>
 		<tr>
 			<td>Device Model</td>
 			<td><?=htmlentities($device_model) ?></td>
@@ -98,6 +123,37 @@ $kernel_info = php_uname('r');
 		<tr>
 			<td>Kernel</td>
 			<td><?=$kernel_info ?></td>
+		</tr>
+		<tr>
+			<td colspan="2"></td>
+		</tr>
+
+		<tr colspan="2" style="font-weight: bold;">
+			<td>Battery</td>
+		</tr>
+		<tr>
+			<td>Power</td>
+			<td><?=strtoupper($ac_powered) ?></td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td><?=strtoupper($battery_status) ?></td>
+		</tr>
+		<tr>
+			<td>Level</td>
+			<td><?=$battery_level ?></td>
+		</tr>
+		<tr>
+			<td>Current</td>
+			<td><?=$battery_current ?> mA</td>
+		</tr>
+		<tr>
+			<td>Voltage</td>
+			<td><?=$battery_voltage ?> V</td>
+		</tr>
+		<tr>
+			<td>Temperature</td>
+			<td><?=$battery_temperature ?> °C</td>
 		</tr>
 	</tbody>
 </table>
