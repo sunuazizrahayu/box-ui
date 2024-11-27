@@ -245,10 +245,58 @@ if ($swap_total_kb > 0) {
 
 
 <?php
+$total_memory_kb = shell_exec('cat /proc/meminfo | grep MemTotal | awk \'{print $2}\'');
+$total_memory_gb = intval(trim($total_memory_kb)) / 1024 / 1024; // Convert to GB
+$total_memory_gb_rounded = number_format($total_memory_gb, 2);
+$total_memory_mb_rounded = number_format($total_memory_gb * 1024, 2);
+
+$free_memory_kb = shell_exec('cat /proc/meminfo | grep MemFree | awk \'{print $2}\'');
+$free_memory_gb = intval(trim($free_memory_kb)) / 1024 / 1024; // Convert to GB
+$free_memory_gb_rounded = number_format($free_memory_gb, 2);
+$free_memory_mb_rounded = number_format($free_memory_gb * 1024, 2);
+
+$buffers_memory_kb = shell_exec('cat /proc/meminfo | grep Buffers | awk \'{print $2}\'');
+$buffers_memory_gb = intval(trim($buffers_memory_kb)) / 1024 / 1024; // Convert to GB
+$buffers_memory_gb_rounded = number_format($buffers_memory_gb, 2);
+$buffers_memory_mb_rounded = number_format($buffers_memory_gb * 1024, 2);
+
+$cached_memory_kb = shell_exec('cat /proc/meminfo | grep ^Cached | awk \'{print $2}\'');
+$cached_memory_gb = intval(trim($cached_memory_kb)) / 1024 / 1024; // Convert to GB
+$cached_memory_gb_rounded = number_format($cached_memory_gb, 2);
+$cached_memory_mb_rounded = number_format($cached_memory_gb * 1024, 2);
+
+$used_memory_gb = $total_memory_gb_rounded - $free_memory_gb_rounded - $buffers_memory_gb_rounded - $cached_memory_gb_rounded;
+$used_memory_mb = $total_memory_mb_rounded - $free_memory_mb_rounded - $buffers_memory_mb_rounded - $cached_memory_mb_rounded;
+$used_memory_percent = number_format((($used_memory_gb / $total_memory_gb_rounded) * 100),2);
+
+$available_memory_gb = $free_memory_gb_rounded + $buffers_memory_gb_rounded + $cached_memory_gb_rounded;
+$available_memory_mb = $free_memory_mb_rounded + $buffers_memory_mb_rounded + $cached_memory_mb_rounded;
+
+
+$total_memory_text = $total_memory_mb_rounded.' MB';
+if ($total_memory_gb_rounded >= 1) {
+	$total_memory_text = $total_memory_gb_rounded.' GB';
+}
+$total_used_memory_text = $used_memory_mb.' MB';
+if ($used_memory_gb >= 1) {
+	$total_used_memory_text = $used_memory_gb.' GB';
+}
+$available_memory_text = $available_memory_mb.' MB';
+if ($available_memory_gb >= 1) {
+	$available_memory_text = $available_memory_gb.' GB';
+}
 ?>
 		<tr>
-			<td>RAM Usage</td>
-			<td><?=$swap_used ?></td>
+			<td>RAM Total</td>
+			<td><?=$total_memory_text ?></td>
+		</tr>
+		<tr>
+			<td>RAM Used</td>
+			<td><?=$total_used_memory_text ?></td>
+		</tr>
+		<tr>
+			<td>RAM Free</td>
+			<td><?=$available_memory_text ?></td>
 		</tr>
 	</tbody>
 </table>
