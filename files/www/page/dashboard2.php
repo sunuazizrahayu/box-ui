@@ -125,9 +125,9 @@ function getMemory()
 	}
 
 	return [
-		'total_memory_text' => $total_memory_text,
-		'total_used_memory_text' => $total_used_memory_text,
-		'total_available_memory_text' => $available_memory_text,
+		'total_text' => $total_memory_text,
+		'used_text' => $total_used_memory_text,
+		'available_text' => $available_memory_text,
 		'buffered_text' => $buffers_text,
 		'cached_text' => $cached_text,
 		'free_text' => $available_memory_text,

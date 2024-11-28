@@ -57,11 +57,11 @@
 						<table class="table">
 							<tr>
 								<td>RAM Total</td>
-								<td>{{ $memory['total_memory_text'] }}</td>
+								<td>{{ $memory['total_text'] }}</td>
 							</tr>
 							<tr>
 								<td>Used</td>
-								<td>{{ $memory['total_used_memory_text'] }}</td>
+								<td>{{ $memory['used_text'] }}</td>
 							</tr>
 							<tr>
 								<td>Buffered</td>
