@@ -269,8 +269,8 @@ $used_memory_gb = floatval($total_memory_gb_rounded) - floatval($free_memory_gb_
 $used_memory_mb = floatval($total_memory_mb_rounded) - floatval($free_memory_mb_rounded) - floatval($buffers_memory_mb_rounded) - floatval($cached_memory_mb_rounded);
 $used_memory_percent = number_format((($used_memory_gb / $total_memory_gb_rounded) * 100),2);
 
-$available_memory_gb = $free_memory_gb_rounded + $buffers_memory_gb_rounded + $cached_memory_gb_rounded;
-$available_memory_mb = $free_memory_mb_rounded + $buffers_memory_mb_rounded + $cached_memory_mb_rounded;
+$available_memory_gb = floatval($free_memory_gb_rounded) + floatval($buffers_memory_gb_rounded) + floatval($cached_memory_gb_rounded);
+$available_memory_mb = floatval($free_memory_mb_rounded) + floatval($buffers_memory_mb_rounded) + floatval($cached_memory_mb_rounded);
 
 
 $total_memory_text = $total_memory_mb_rounded.' MB';
