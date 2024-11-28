@@ -20,13 +20,32 @@ function redirect($path='')
 	header('Location: /'.$path);
 	exit;
 }
+function site_url($path='')
+{
+	return '/'.$path;
+}
+function current_url()
+{
+	return $_SERVER['REQUEST_URI'];
+}
+
+# TEMPLATE ENGINE
+include $_SERVER['DOCUMENT_ROOT'].'/layout/Template.php';
+include $_SERVER['DOCUMENT_ROOT'].'/layout/Modello.php';
+
+function view($path='', $data=[])
+{
+	$template = new Template();
+	// $template = new Modello();
+	echo $template->view($path, $data);
+}
 
 # ROUTING
 // ------------------------------------------------------------------------
 // For get URL PATH
 $request = $_SERVER['REQUEST_URI'];
 $route['/'] = 'page/index.php';
-$route['/dashboard'] = 'page/dashboard.php';
+$route['/dashboard'] = 'page/dashboard2.php';
 
 
 // middleware
