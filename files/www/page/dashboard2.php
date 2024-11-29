@@ -133,6 +133,38 @@ function getMemory()
 		'free_text' => $available_memory_text,
 	];
 }
+function getSwap()
+{
+	$swap_total_kb = shell_exec('cat /proc/meminfo | grep SwapTotal | awk \'{print $2}\'');
+	$swap_total_gb = intval(trim($swap_total_kb)) / 1024 / 1024; // Convert to GB
+	$swap_total_gb_rounded = number_format($swap_total_gb, 2);
+	$swap_total = 'Not Available';
+	if ($swap_total_kb > 0) {
+		$swap_total = $swap_total_gb_rounded .' GB';
+	}
+
+	$swap_free_kb = shell_exec('cat /proc/meminfo | grep SwapFree | awk \'{print $2}\'');
+	$swap_free_gb = intval(trim($swap_free_kb)) / 1024 / 1024; // Convert to GB
+	$swap_free_gb_rounded = number_format($swap_free_gb, 2);
+	$swap_free = 'Not Available';
+	if ($swap_free_kb > 0) {
+		$swap_free = $swap_free_gb_rounded . ' GB';
+	}
+
+	$swap_used = 0;
+	$swap_used_percent = 0;
+	if ($swap_total_kb > 0) {
+		$swap_used_gb = $swap_total_gb_rounded - $swap_free_gb_rounded;
+		$swap_used = $swap_used_gb . ' GB';
+		$swap_used_percent = number_format((($swap_used_gb / $swap_total_gb_rounded) * 100), 2);
+	}
+
+	return [
+		'total' => $swap_total,
+		'free' => $swap_free,
+		'used' => $swap_used,
+	];
+}
 
 $data['device_model'] = getDeviceModel();
 $data['kernel_version'] = getKernelVersion();
@@ -140,5 +172,6 @@ $data['uptime'] = getUptime('%dd %hh %mm %ss');
 $data['cpu_usage'] = getCpuUsage();
 $data['time_now'] = getTime('Y-m-d H:i:s');
 $data['memory'] = getMemory();
+$data['swap'] = getSwap();
 $data['page_title'] = 'Dashboard';
 view('page/dashboard', $data);

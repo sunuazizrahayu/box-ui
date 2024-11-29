@@ -56,7 +56,7 @@
 					<div class="tab-pane" id="tab_2">
 						<table class="table">
 							<tr>
-								<td>RAM Total</td>
+								<td>Total</td>
 								<td>{{ $memory['total_text'] }}</td>
 							</tr>
 							<tr>
@@ -81,47 +81,48 @@
 						<table class="table">
 							<tr>
 								<td>Disk space</td>
-								<td></td>
+								<td>-</td>
 							</tr>
 							<tr>
 								<td>Temp space</td>
-								<td></td>
+								<td>-</td>
 							</tr>
 							<tr>
 								<td>/dev/root</td>
-								<td></td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>Swap Total</td>
+								<td>{{ $swap['total'] }}</td>
+							</tr>
+							<tr>
+								<td>Swap Used</td>
+								<td>{{ $swap['used'] }}</td>
+							</tr>
+							<tr>
+								<td>Swap Free</td>
+								<td>{{ $swap['free'] }}</td>
 							</tr>
 						</table>
 					</div>
 					<div class="tab-pane" id="tab_4">
 						<table class="table">
 							<tr>
-								<td>XXXX</td>
-								<td></td>
+								<td colspan="2">Coming Soon</td>
 							</tr>
 						</table>
 					</div>
 					<div class="tab-pane" id="tab_5">
 						<table class="table">
 							<tr>
-								<td>XXXX</td>
-								<td></td>
+								<td colspan="2">Coming Soon</td>
 							</tr>
 						</table>
 					</div>
 					<div class="tab-pane" id="tab_6">
 						<table class="table">
 							<tr>
-								<td>Disk space</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Temp space</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>/dev/root</td>
-								<td></td>
+								<td colspan="2">Coming Soon</td>
 							</tr>
 						</table>
 					</div>
