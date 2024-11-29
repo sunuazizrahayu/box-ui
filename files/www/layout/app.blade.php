@@ -43,14 +43,18 @@ $app_url = site_url();
     <!-- Logo -->
     <a href="<?=$app_url ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini">
+        <!-- <b>B-UI</b> -->
+        <img src="/webui/assets/img/icon.png" style="margin-top: -5px; transform: scale(1.8);">
+      </span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <!-- <span class="logo-lg"><b>BOX</b>UI</span> -->
+      <span class="logo-lg"><img src="/webui/assets/img/logo.png" style="margin-top: -5px;"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -61,7 +65,7 @@ $app_url = site_url();
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
               <!-- <img src="<?=$theme ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
               <i class="fa fa-user-o"></i>
               <span class="hidden-xs">Account</span>
